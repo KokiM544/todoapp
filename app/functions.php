@@ -31,6 +31,8 @@ function addTodo($pdo) {
     $stmt = $pdo->prepare("INSERT INTO todos (title) VALUES (:title)");
     $stmt->bindValue('title', $title, PDO::PARAM_STR);
     $stmt->execute();
+
+    return (int) $pdo->lastInsertId();
 }
 
 function toggleTodo($pdo) {

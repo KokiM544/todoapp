@@ -1,22 +1,25 @@
 'use strict';
 
 {
-    const token = document.querySelector('main').dataset.token;
+    const token = document.querySelector('main.todos').dataset.token;
     const input = document.querySelector('[name="title"]');
     const ul = document.querySelector('ul');
     input.focus();
     
     ul.addEventListener('click', e => {
         if(e.target.type === 'checkbox') {
+            console.log("checkbox clicked" + e.target);
             fetch('?action=toggle', {
                 method: 'POST',
                 body: new URLSearchParams({
-                  id: e.target.parentNode.dataset.id,
+                //   id: e.target.parentNode.dataset.id,
+                  id: e.target.parentNode.parentNode.dataset.id,
                   token: token,
                 }),
             });
-        
-            e.target.nextElementSibling.classList.toggle('done');
+            console.log("change toggle!");
+            // e.target.nextElementSibling.classList.toggle('done');
+            e.target.parentNode.nextElementSibling.classList.toggle('done');
         }
 
         if(e.target.classList.contains('delete')) {
@@ -30,6 +33,7 @@
                   token: token,
                 }),
             });
+            console.log("testtest");
             e.target.parentNode.parentNode.remove();
         }
 
@@ -42,15 +46,26 @@
     });
 
     function addTodo(id, titleValue) {
+        console.log("token:" + token);
         const li = document.createElement('li');
         li.dataset.id = id;
+
+        const label = document.createElement('label');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.classList.add("todo-check");
+        const dummydiv = document.createElement('div');
+        dummydiv.classList.add('DummyInput');
+        label.appendChild(checkbox);
+        label.appendChild(dummydiv);
+
+        
         const title = document.createElement('span');
         title.textContent = titleValue;
 
         const tdiv = document.createElement('div');
         tdiv.classList.add('test');
+        
 
         const editform = document.createElement('form');
         editform.action = "edit.php/?action=toedit";
@@ -81,7 +96,7 @@
         tdiv.appendChild(editform);
         tdiv.appendChild(deletediv);
 
-        li.appendChild(checkbox);
+        li.appendChild(label);
         li.appendChild(title);
         li.appendChild(tdiv);
 
@@ -91,9 +106,8 @@
     input.focus();
     document.querySelector('form.add').addEventListener('submit', e=> {
         e.preventDefault();
-
+        console.log("token:" + token);
         const title = input.value;
-
         fetch('?action=add', {
             method: 'POST',
             body: new URLSearchParams({

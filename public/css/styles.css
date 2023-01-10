@@ -1,23 +1,68 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
+    background-color: lightgray;
+    margin: 0;
 }
 
-main {
+header {
+    background-color: white;
+    display: flex;
+}
+
+.header-img {
+    margin: 0;
+}
+
+div.links {
+    display: flex;
+    height: 32px;
+}
+
+div > a {
+    display: block;
+    width: 60px;
+    line-height: 32px;
+    text-align: center;
+    text-decoration-line: none;
+    color: black;
+}
+
+div > a:hover {
+    background-color: gainsboro;
+}
+
+main.field {
+    background-color: white;
+    width: 90%;
+    margin: 32px auto;
+
+}
+
+main.todos {
     width: 320px;
     margin: 32px auto;
+    padding-bottom: 24px;
 }
 
 h1 {
+    /* 元パラーメータ
     font-size: 24px;
     text-align: center;
-    margin: 0 0 16px;
+    margin: 0 0 16px; */
+    width: 128px;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /* margin: 0 0 16px; */
 }
 
 input[type="text"] {
     width: 100%;
     padding: 4px;
     box-sizing: border-box;
+    margin-top: 32px;
     margin-bottom: 16px;
 }
 
@@ -43,8 +88,52 @@ li {
     color: #ccc;
 }
 
+label {
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
 input[type="checkbox"] {
+    /* margin: 8px; */
+    margin: 0;
+    width: 0;
+    opacity: 0;
+}
+
+.DummyInput {
     margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    border: solid 2px transparent;
+    background: rgba(0, 0, 0, .15);
+    border-radius: 50%;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.DummyInput:hover {
+    opacity: .5;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + .DummyInput {
+    background-color: white;
+    border: solid red 1.5px;
+}
+
+input[type="checkbox"]:checked + .DummyInput::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    border-radius: 50%;
+    background-color: orange;
+    box-sizing: border-box;
+
 }
 
 .delete {
@@ -133,4 +222,8 @@ input[type="checkbox"] {
 
 .spacer {
     width: 100%;
+}
+
+.editmenu {
+    margin: 0 auto;
 }
